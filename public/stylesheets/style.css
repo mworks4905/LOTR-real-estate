@@ -1,8 +1,29 @@
-body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+
+.addPost {
+  float: left;
+  margin-top: .5em;
 }
 
-a {
-  color: #00B7FF;
+img {
+  height: 11em;
+  width:auto;
+  margin-left: -1rem;
+}
+
+.title {
+  font-weight: bold;
+  float: left;
+}
+
+.author {
+  font-weight: bold;
+  float: right;
+}
+
+.green {
+  color: green;
+}
+
+.red {
+  color: red;
 }
