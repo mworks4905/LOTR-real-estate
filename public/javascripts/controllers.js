@@ -1,5 +1,10 @@
-app.controller('MainController', function($scope){
+app.controller('MainController', function($scope, postsService){
 
-  $scope.message = "Hey there!"
+  postsService.getPosts().then(function(results) {
+    console.log(results);
+    $scope.arr = results
+
+  })
+
 
 })
