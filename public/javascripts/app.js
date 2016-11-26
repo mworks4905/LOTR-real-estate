@@ -6,5 +6,9 @@ app.config(function($routeProvider){
     templateUrl: './partials/posts.html',
     controller: 'MainController'
   })
+  .when('/newPost', {
+    templateUrl: './partials/newPost.html',
+    controller: 'MainController'
+  })
 
 })

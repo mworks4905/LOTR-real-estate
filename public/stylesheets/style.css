@@ -1,7 +1,10 @@
-
 .addPost {
   float: left;
   margin-top: .5em;
+}
+
+.subreddit {
+  text-align: center;
 }
 
 img {
