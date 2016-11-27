@@ -7,17 +7,24 @@ var bcrypt = require('bcrypt');
 router.get('/posts', function(req, res, next) {
   knex('posts')
   .innerJoin('users', 'posts.user_id', 'users.id')
-  .select('users.id', 'users.first_name as firstName', 'posts.id as postId', 'posts.user_id', 'posts.image', 'posts.title as postTitle', 'posts.body as postBody', 'posts.votes', 'posts.comments', 'posts.created_at')
+  .select('users.id', 'users.username', 'posts.id as postId', 'posts.user_id', 'posts.image', 'posts.title as postTitle', 'posts.body as postBody', 'posts.votes', 'posts.comments', 'posts.created_at')
   .then(function(results) {
-    console.log(results);
+    // console.log(results);
+    res.json(results)
+  })
+});
+
+router.post('/post', function(req, res, next) {
+  knex('posts')
+  .where('posts.id', req.body.id)
+  .innerJoin('users', 'posts.user_id', 'users.id')
+  .select('users.id', 'users.username', 'posts.id as postId', 'posts.user_id', 'posts.image', 'posts.title as postTitle', 'posts.body as postBody', 'posts.votes', 'posts.comments', 'posts.created_at')
+  .then(function(results) {
     res.json(results)
   })
 });
 
 router.post('/newPost', function(req, res, next){
-  console.log('In the posts route');
-  console.log(req.body);
-
   knex('posts')
   .returning('*')
   .insert({
@@ -28,11 +35,20 @@ router.post('/newPost', function(req, res, next){
     image: req.body.image,
     votes: 0,
     comments: 0,
-
-  }).then(function(results) {
-    console.log(results);
+  })
+  .then(function(results) {
     res.json(results)
+  })
 })
+
+router.post('/delpost', function(req, res, next){
+  knex('posts')
+  .where('id', req.body.id)
+  .del()
+  .then(function(results){
+    res.json(results)
+  })
+
 })
 
 //

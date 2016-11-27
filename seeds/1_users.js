@@ -4,18 +4,15 @@ exports.seed = function(knex, Promise) {
         .then(function() {
             return Promise.all([
                 knex('users').insert([{
-                    first_name: 'Gandalf',
-                    last_name: 'Grey',
+                    username: 'GandalfIsAWizardKing',
                     email: 'wizard@gmail.com',
                     hash: '$2a$12$nIWNWkn0l/33UVKGMeMpnehLvXnDwor7NtHXTm.AW3.sp2JHR30Ia'
                 }, {
-                    first_name: 'Frodo',
-                    last_name: 'Baggins',
+                    username: 'FBRingRunna',
                     email: 'hobbit@gmail.com',
                     hash: '$2a$12$nIWNWkn0l/33UVKGMeMpnehLvXnDwor7NtHXTm.AW3.sp2JHR30Ia'
                 }, {
-                    first_name: 'Craig',
-                    last_name: 'Quincy',
+                    username: 'Craig',
                     email: 'craig@gmail.com',
                     hash: '$2a$12$nIWNWkn0l/33UVKGMeMpnehLvXnDwor7NtHXTm.AW3.sp2JHR30Ia'
                 }])
