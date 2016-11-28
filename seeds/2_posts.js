@@ -21,14 +21,14 @@ exports.seed = function(knex, Promise) {
                   image:'http://www.thelandofshadow.com/wp-content/uploads/2016/07/FangornLarge1.jpg',
                   body:'If you’re the outdoorsy type then this is the place for you! Secluded and remote literally no one will find you. The “neighbors” keep to themselves as long as you don’t go trying to capitalize on the beautiful old growth forest. Priced to sell!!!',
                   votes: -100,
-                  comments: 1
+                  comments: 2
                 }, {
                   user_id: 3,
                   title:'Rivendell',
                   image:'http://sagesselfique.s.a.pic.centerblog.net/080217073050189811730600.jpg',
                   body:'Elegant old world architecture, definitely built to last! You will not be disappointed with the amazing scenic views of the surrounding mountainside and lush forest, not to mention several beautiful waterfalls. Currently sitting at the very reasonable price considering the craftsmanship of buildings and surrounding grounds.',
                   votes: 15,
-                  comments: 2
+                  comments: 1
                 }]),
             ]);
         });

@@ -16,34 +16,58 @@ app.controller('MainController', function($scope, postsService, $location, $root
     })
 
     $scope.currentPost = function(id) {
-            postsService.getPost(id)
-                .then(function(results) {
-                    console.log('main controller: ' + results);
-                    $rootScope.onePost = results
-                })
-        }
-        // $scope.greeting = "Hello"
-
-    $scope.newPost = function(formData) {
-        // formData.votes = 0
-        // formData.comments = 0
-        formData.user_id = 1
-        postsService.postPost(formData).then(function(results) {
-            console.log('The results: ' + results);
-            $scope.post = results
-            $location.path('/newPost')
+        postsService.getPost(id).then(function(results) {
+          console.log(results);
+            $rootScope.onePost = results
         })
     }
+
+    $scope.newPost = function(formData) {
+        postsService.postPost(formData).then(function(results) {
+            $scope.post = results
+            $location.path('/')
+        })
+    }
+
+
 })
 
 app.controller('AuthController', function($scope, authService) {
     $scope.signUp = function(user) {
         authService.signUp(user).then(function(results) {
-          
         })
     }
+    $scope.logIn = function(user) {
+      console.log("in the log in function");
+        authService.logIn(user).then(function(results) {
+        })
+    }
+
 })
 
 app.controller('PostController', function($scope, $location, postsService, $rootScope) {
     $rootScope.onePost = $scope.onePost
+
+    $scope.getComments = function(postId) {
+        postsService.getComments(postId).then(function(results){
+          console.log(results);
+          $scope.comments = results
+        })
+    }
+
+    $scope.delPost = function(id) {
+        postsService.delPost(id).then(function(results){
+            $scope.post = results
+            $location.path('/')
+        })
+    }
+
+    $scope.voteUp = function(id, voteCount){
+      var votes = voteCount++
+      console.log(votes);
+      postsService.voteUp(id, votes).then(function(results){
+        $scope.Onepost.votes = results
+      })
+    }
+
 })

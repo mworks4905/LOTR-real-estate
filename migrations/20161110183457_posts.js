@@ -10,7 +10,7 @@ exports.up = function(knex) {
    table.text('image')
    table.text('body')
    table.integer('votes')
-   table.integer('comments')
+   table.integer('comments');
    table.dateTime('created_at')
  })
 }

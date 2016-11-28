@@ -9,13 +9,8 @@ app.service('postsService', function($http){
     getPost: function(id){
       var reqObj = {id: id}
       return $http.post('/api/post/', reqObj).then(function(response){
+        // console.log(response.data);
         return response.data
-      })
-    },
-
-    getComments: function(){
-      return $http.get('/api/comments').then(function(response){
-        console.log(response)
       })
     },
 
@@ -36,8 +31,23 @@ app.service('postsService', function($http){
         console.log('post deleted');
 
       })
-    }
+    },
 
+    getComments: function(postId){
+      var reqObj = {id: postId}
+      return $http.post('./api/comments', reqObj).then(function(response){
+        return response.data
+      })
+    },
+
+    voteUp: function(id, votes){
+      var reqObj = {id: id, votes: votes}
+      console.log(reqObj);
+      return $http.post('./api/voteUp', reqObj).then(function(res){
+        console.log(res.data);
+        return res.data
+      })
+    }
   }
 })
 
