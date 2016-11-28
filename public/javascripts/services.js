@@ -9,7 +9,6 @@ app.service('postsService', function($http){
     getPost: function(id){
       var reqObj = {id: id}
       return $http.post('/api/post/', reqObj).then(function(response){
-        // console.log(response.data);
         return response.data
       })
     },
@@ -21,7 +20,6 @@ app.service('postsService', function($http){
     },
 
     postPost: function(formData){
-      // console.log('Form Data: ', formData);
       return $http.post('/api/newPost', formData).then(function(response){
         console.log('made a new post: ' + response.data);
         return response.data
@@ -36,10 +34,37 @@ app.service('postsService', function($http){
       var reqObj = {id: id}
       return $http.post('./api/delpost', reqObj).then(function(respone){
         console.log('post deleted');
-        
+
       })
     }
 
+  }
+})
 
+app.service('authService', function($http, $location){
+  return{
+    signUp: function(user){
+      return $http.post('./api/signup', user).then(function(response){
+        $location.path('/')
+      })
+    },
+    logIn: function(user){
+      return $http.post('./api/login', user).then(function(response){
+        $location.path('/')
+      })
+    }
+  }
+
+})
+
+app.service('cookieService', function($cookies, $location) {
+  return {
+    decodeCookie: function(cookie){
+      let base64decoded = atob(cookie)
+      let sliceStart = (base64decoded.indexOf('"username":"') + 12)
+      let sliceEnd = (base64decoded.indexOf('}}')-1)
+      let username = base64decoded.slice(sliceStart, sliceEnd)
+      return username
+    }
   }
 })

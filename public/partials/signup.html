@@ -1,6 +1,6 @@
 <div class="container">
     <div class="col xs-12">
-        <form>
+        <form ng-submit="signUp(user)">
             <div class="form-group">
                 <label for="username">Username</label>
                 <input ng-model="user.username" type="text" class="form-control" id="username" placeholder="Choose a Username">
@@ -11,9 +11,9 @@
             </div>
             <div class="form-group">
                 <label for="password">Password</label>
-                <input ng-model="hash" type="password" class="form-control" id="password" placeholder="Enter your Password">
+                <input ng-model="user.hash" type="password" class="form-control" id="password" placeholder="Enter your Password">
             </div>
-            <button ng-submit="signUp(user)" type="submit" class="btn btn-default">Sign Up</button>
+            <button  type="submit" class="btn btn-default">Sign Up</button>
         </form>
     </div>
 </div>

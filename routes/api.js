@@ -28,8 +28,7 @@ router.post('/newPost', function(req, res, next){
   knex('posts')
   .returning('*')
   .insert({
-    user_id: req.body.user_id,
-    // user_id: req.session.userInfo.id,
+    user_id: req.session.userInfo.id,
     title: req.body.postTitle,
     body: req.body.postBody,
     image: req.body.image,
@@ -49,6 +48,46 @@ router.post('/delpost', function(req, res, next){
     res.json(results)
   })
 
+})
+
+router.post('/signup', function(req, res, next) {
+  knex('users').where('username', req.body.username).then(function(results) {
+    if (results.length >= 1) {
+      console.log('User already exists!');
+    } else {
+      let hash = bcrypt.hashSync(req.body.hash, 12)
+      knex('users')
+      .returning('*')
+      .insert({
+        username: req.body.username,
+        email: req.body.email,
+        hash: hash
+      }).then(function(results){
+        var user = results[0]
+        delete user.hash
+        req.session.userInfo = user
+        res.send('User signed up!')
+      })
+    }
+  })
+})
+
+router.post('/login', function(req, res, next){
+  knex('users').where('username', req.body.username).then(function(results){
+    if (results.length < 1){
+      console.log('Not authorized');
+    } else {
+      let isValid = bcrypt.compareSync(req.body.password, results[0].hashed_pw)
+      if (isValid){
+        let userSesh = results[0]
+        delete userSesh.hashed_pw
+        req.session.userInfo = userSesh
+        res.send('User logged in!')
+      } else {
+        console.log('wrong password');
+      }
+    }
+  })
 })
 
 //
